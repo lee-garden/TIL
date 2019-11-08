@@ -6,12 +6,12 @@
  		http://www.springframework.org/schema/beans/spring-beans.xsd">
  		
  	<bean id="NormalBattery" class="battery.NormalBattery"/>
+ 	<bean id="ChargeBattery" class="battery.ChargeBattery"/>
  	
- 	<bean id="Robot" class="toy.Robot">
- 	</bean>
+ 	<bean id="Robot" class="toy.Robot"/>
  	
  	<bean id="Car" class="toy.Car">
- 		<constructor-arg ref="NormalBattery"></constructor-arg>
+ 		<property name="battery" ref="ChargeBattery"></property>
  	</bean>
  	
  </beans>

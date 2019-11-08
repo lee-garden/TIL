@@ -17,7 +17,10 @@ public class MainClass {
 				new GenericXmlApplicationContext("classpath:applicationContext.xml");
 		
 		Robot robot = ctx.getBean("Robot", Robot.class);
+		robot.getBattery();
+		
 		Car car = ctx.getBean("Car", Car.class);
+		car.getBattery();
 	}
 
 }
