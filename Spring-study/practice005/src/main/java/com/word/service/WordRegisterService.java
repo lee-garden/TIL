@@ -3,20 +3,23 @@ package com.word.service;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
 
 import com.word.WordSet;
 import com.word.dao.WordDao;
 
+@Repository
 public class WordRegisterService {
 
-	@Resource
+	@Autowired
+	@Qualifier("usedDao")
 	private WordDao wordDao;
 	
-    public WordRegisterService() {
+	public WordRegisterService() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	@Autowired
 	public WordRegisterService(WordDao wordDao) {
 		this.wordDao = wordDao;
 	}
@@ -35,7 +38,6 @@ public class WordRegisterService {
 		return wordSet == null ? true : false;
 	}
 	
-	@Autowired
 	public void setWordDao(WordDao wordDao) {
 		this.wordDao = wordDao;
 	}

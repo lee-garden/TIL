@@ -1,15 +1,23 @@
 package com.word.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Repository;
 
 import com.word.WordSet;
 import com.word.dao.WordDao;
 
+@Repository
 public class WordSearchService {
-	
+
+	@Autowired
+	@Qualifier("usedDao")
 	private WordDao wordDao;
 	
-	@Autowired
+	public WordSearchService() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public WordSearchService(WordDao wordDao) {
 		this.wordDao = wordDao;
 	}
