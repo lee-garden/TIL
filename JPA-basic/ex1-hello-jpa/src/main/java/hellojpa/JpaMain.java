@@ -33,10 +33,18 @@ public class JpaMain {
             List<Member> result = em.createQuery("select m from Member as m", Member.class)
                     .getResultList();
 
+            // 영속성 컨텍스트의 detach, clear, close에 대한 이해
+            // detach = > 영속성 컨텍스트로의 분리
+            // clear = > 영속성 컨텍스트 비우기
+            // close = > 영속성 컨텍스트 종료
+            Member member1 = em.find(Member.class, 1L); // 쿼리 한번 나가고
+            em.clear();
+            Member member2 = em.find(Member.class, 1L); // 쿼리 한번 또나감
+
             for (Member member : result) {
                 System.out.println("member.name = " + member.getName());
             }
-
+//            em.close();
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
