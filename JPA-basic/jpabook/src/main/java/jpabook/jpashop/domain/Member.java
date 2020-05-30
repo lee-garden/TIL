@@ -3,6 +3,7 @@ package jpabook.jpashop.domain;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
 
 @Entity
 public class Member {
@@ -19,6 +20,10 @@ public class Member {
     private String street;
 
     private String zipcode;
+
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
 
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
