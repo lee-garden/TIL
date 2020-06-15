@@ -1,5 +1,6 @@
 package jpabook.jpashop;
 
+import jpabook.jpashop.domain.Book;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.domain.Team;
 
@@ -18,19 +19,10 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setNaem("hello");
-
-            em.persist(member);
-
-            Team team = new Team();
-            team.setName("team1");
-
-            System.out.println("==================");
-            team.getMembers().add(member);
-            em.persist(team);
-            System.out.println("==================");
-            System.out.println("커밋 시작");
+            Book book = new Book();
+            book.setAuthor("정원");
+            book.setName("JPA");
+            em.persist(book);
             tx.commit();
             System.out.println("커밋 완료");
         } catch (Exception e) {

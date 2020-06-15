@@ -5,14 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Item {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+public abstract class Item extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ITEM_ID")
     private Long id;
 
-    private String anem;
+    private String name;
 
     private Integer price;
 
@@ -29,12 +30,12 @@ public class Item {
         this.id = id;
     }
 
-    public String getAnem() {
-        return anem;
+    public String getName() {
+        return name;
     }
 
-    public void setAnem(String anem) {
-        this.anem = anem;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Integer getPrice() {

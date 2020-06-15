@@ -1,3 +1,5 @@
+package jpabook.jpashop.domain;
+
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
