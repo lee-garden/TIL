@@ -13,7 +13,7 @@ public class Member extends BaseEntity  {
     @Column(name = "MEMBER_ID")
     private Long id;
 
-    private String naem;
+    private String name;
 
     private String city;
 
@@ -36,12 +36,12 @@ public class Member extends BaseEntity  {
         this.id = id;
     }
 
-    public String getNaem() {
-        return naem;
+    public String getName() {
+        return name;
     }
 
-    public void setNaem(String naem) {
-        this.naem = naem;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCity() {
