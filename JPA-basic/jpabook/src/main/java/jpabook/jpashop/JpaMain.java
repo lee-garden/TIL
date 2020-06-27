@@ -1,6 +1,8 @@
 package jpabook.jpashop;
 
+import jpabook.jpashop.domain.Child;
 import jpabook.jpashop.domain.Member;
+import jpabook.jpashop.domain.Parent;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,21 +19,17 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member1 = new Member();
-            member1.setName("hello");
+            Child child1 = new Child();
+            Child child2 = new Child();
 
-            em.persist(member1);
+            Parent parent = new Parent();
+            parent.addChild(child1);
+            parent.addChild(child2);
 
+            System.out.println("====================");
+            em.persist(parent);
             em.flush();
-            em.clear();
-
-            Member reference = em.getReference(Member.class, member1.getId());
-
-            System.out.println("reference : " + reference.getName());
-            System.out.println("isLoaded : " + emf.getPersistenceUnitUtil().isLoaded(reference));
         } catch (Exception e) {
-            System.out.println("exception!");
-            e.printStackTrace();
             tx.rollback();
         } finally {
             em.close();
