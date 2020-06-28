@@ -1,9 +1,6 @@
 package jpabook.jpashop.domain;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.locks.Lock;
 
 @Entity
 public class Member extends BaseEntity  {
@@ -15,18 +12,11 @@ public class Member extends BaseEntity  {
 
     private String name;
 
-    private String city;
+    @Embedded
+    private Period workPeriod;
 
-    private String street;
-
-    private String zipcode;
-
-//    @OneToOne
-//    @JoinColumn(name = "LOCKER_ID")
-//    private Locker locker;
-
-    @OneToMany(mappedBy = "member")
-    private List<Order> orders = new ArrayList<>();
+    @Embedded
+    private Address homeAddress;
 
     public Long getId() {
         return id;
@@ -44,35 +34,19 @@ public class Member extends BaseEntity  {
         this.name = name;
     }
 
-    public String getCity() {
-        return city;
+    public Period getWorkPeriod() {
+        return workPeriod;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setWorkPeriod(Period workPeriod) {
+        this.workPeriod = workPeriod;
     }
 
-    public String getStreet() {
-        return street;
+    public Address getHomeAddress() {
+        return homeAddress;
     }
 
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getZipcode() {
-        return zipcode;
-    }
-
-    public void setZipcode(String zipcode) {
-        this.zipcode = zipcode;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
     }
 }
