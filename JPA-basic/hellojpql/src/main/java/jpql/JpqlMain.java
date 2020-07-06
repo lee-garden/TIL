@@ -14,17 +14,22 @@ public class JpqlMain {
         tx.begin();
 
         try {
+            Team team = new Team();
+            team.setName("teamA");
+            em.persist(team);
+
             Member member = new Member();
             member.setUsername("member1");
             member.setAge(10);
+            member.setTeam(team);
             em.persist(member);
 
             em.flush();
             em.clear();
 
-            List<Member> result = em.createQuery("select m from Member m order by m.age desc")
-                    .setFirstResult(0)
-                    .setMaxResults(10)
+            String query = "select m from Member m inner join m.team t";
+
+            List<Member> result = em.createQuery(query, Member.class)
                     .getResultList();
 
             System.out.println("result = " + result.size());
