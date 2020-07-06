@@ -19,11 +19,20 @@ public class JpqlMain {
             member.setAge(10);
             em.persist(member);
 
-            List<MemberDTO> resultList = em.createQuery("select new jpql.MemberDTO(m.username, m.age) from Member m", MemberDTO.class)
-                .getResultList();
+            em.flush();
+            em.clear();
 
-            MemberDTO memberDTO = resultList.get(0);
-            System.out.println(memberDTO.getAge());
+            List<Member> result = em.createQuery("select m from Member m order by m.age desc")
+                    .setFirstResult(0)
+                    .setMaxResults(10)
+                    .getResultList();
+
+            System.out.println("result = " + result.size());
+            for (Member memberItem : result) {
+                System.out.println("memberItem = " + memberItem);
+
+            }
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
