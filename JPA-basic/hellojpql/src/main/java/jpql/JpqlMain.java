@@ -22,20 +22,22 @@ public class JpqlMain {
             member.setUsername("member1");
             member.setAge(10);
             member.setTeam(team);
+            member.setMemberType(MemberType.ADMIN);
             em.persist(member);
 
             em.flush();
             em.clear();
 
-            String query = "select m from Member m inner join m.team t";
+            String query = "select m.username, 'HELLO', TRUE from Member m " +
+                           "where m.memberType = jpql.MemberType.ADMIN";
 
-            List<Member> result = em.createQuery(query, Member.class)
+            List<Object[]> result = em.createQuery(query)
                     .getResultList();
 
-            System.out.println("result = " + result.size());
-            for (Member memberItem : result) {
-                System.out.println("memberItem = " + memberItem);
-
+            for (Object[] objects : result) {
+                System.out.println("objects = " + objects[0]);
+                System.out.println("objects = " + objects[1]);
+                System.out.println("objects = " + objects[2]);
             }
 
             tx.commit();
