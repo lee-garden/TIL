@@ -43,16 +43,17 @@ public class JpqlMain {
             em.flush();
             em.clear();
 
-            String query = "select t from Team t";
-            List<Team> result = em.createQuery(query, Team.class)
-                    .setFirstResult(0)
-                    .setMaxResults(2)
+            List<Member> members = em.createNamedQuery("Member.findByUsername", Member.class)
+                    .setParameter("username", "회원1")
                     .getResultList();
 
-            for (Team team : result) {
-                for (Member member : team.getMembers()) {
-                    System.out.println(team.getName() + " => " + member.getUsername());
-                }
+//            String query = "select m from Member m where m = :member";
+//            Member result = em.createQuery(query, Member.class)
+//                    .setParameter("member", member1)
+//                    .getSingleResult();
+
+            for (Member member : members) {
+                System.out.println(member.getUsername());
             }
 
             tx.commit();
