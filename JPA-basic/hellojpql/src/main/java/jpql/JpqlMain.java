@@ -43,16 +43,16 @@ public class JpqlMain {
             em.flush();
             em.clear();
 
-//            String query = "select m from Member m";
-            
-            // 지연 로딩 보다 Fetch Join이 우선순위가 높음.
-            String query = "select m From Member m join fetch m.team";
-            List<Member> result = em.createQuery(query, Member.class)
+            String query = "select t from Team t";
+            List<Team> result = em.createQuery(query, Team.class)
+                    .setFirstResult(0)
+                    .setMaxResults(2)
                     .getResultList();
 
-            for (Member member : result) {
-                System.out.println("member : " + member.getUsername());
-                System.out.println("team : " + member.getTeam().getName());
+            for (Team team : result) {
+                for (Member member : team.getMembers()) {
+                    System.out.println(team.getName() + " => " + member.getUsername());
+                }
             }
 
             tx.commit();
