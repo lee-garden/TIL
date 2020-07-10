@@ -14,26 +14,45 @@ public class JpqlMain {
         tx.begin();
 
         try {
-            Team team = new Team();
-            team.setName("teamA");
-            em.persist(team);
+            Team teamA = new Team();
+            teamA.setName("teamA");
+            em.persist(teamA);
 
-            Member member = new Member();
-            member.setUsername("관리자");
-            member.setAge(10);
-            member.setTeam(team);
-            member.setMemberType(MemberType.ADMIN);
-            em.persist(member);
+            Team teamB = new Team();
+            teamB.setName("teamB");
+            em.persist(teamB);
+
+            Member member1 = new Member();
+            member1.setUsername("회원1");
+            member1.setAge(10);
+            member1.setTeam(teamA);
+            em.persist(member1);
+
+            Member member2 = new Member();
+            member2.setUsername("회원2");
+            member2.setAge(10);
+            member2.setTeam(teamA);
+            em.persist(member2);
+
+            Member member3 = new Member();
+            member3.setUsername("회원3");
+            member3.setAge(10);
+            member3.setTeam(teamB);
+            em.persist(member3);
 
             em.flush();
             em.clear();
 
-            String query = "select 'a' || 'b' from Member m";
-            List<String> result = em.createQuery(query, String.class)
+//            String query = "select m from Member m";
+            
+            // 지연 로딩 보다 Fetch Join이 우선순위가 높음.
+            String query = "select m From Member m join fetch m.team";
+            List<Member> result = em.createQuery(query, Member.class)
                     .getResultList();
 
-            for (String s : result) {
-                System.out.println("s = " + s);
+            for (Member member : result) {
+                System.out.println("member : " + member.getUsername());
+                System.out.println("team : " + member.getTeam().getName());
             }
 
             tx.commit();
