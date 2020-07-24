@@ -1,6 +1,11 @@
 package jpabook.jpashop.repository;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.OrderStatus;
+import jpabook.jpashop.domain.QMember;
+import jpabook.jpashop.domain.QOrder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -22,8 +27,24 @@ public class OrderRepository {
     }
 
     public List<Order> findAll() {
-        return em.createQuery("select o from Order o", Order.class)
-                .getResultList();
+        QOrder order = QOrder.order;
+        QMember member = QMember.member;
+
+        JPAQueryFactory query = new JPAQueryFactory(em);
+
+        return query
+            .select(order)
+            .from(order)
+            .join(order.member, member)
+            .limit(1000)
+            .fetch();
+    }
+
+    private BooleanExpression statusEq(OrderStatus status) {
+        if (status == null) {
+            return null;
+        }
+        return QOrder.order.status.eq(status);
     }
 
     public List<Order> findAllWithMemberDelivery() {
