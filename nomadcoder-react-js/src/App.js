@@ -1,25 +1,42 @@
 import React from 'react';
-
-function Food({ name }) {
-  return <h1>Hello {name}</h1>
-}
+import PropTyeps from 'prop-types';
 
 const foodILike = [
   {
-    "name": "kimchi"
+    id:1,
+    name: "kimchi",
+    rating: 5
   },
   {
-    "name": "samgiopsal"
+    id:2,
+    name: "samgiopsal",
+    rating: 4.9
   },
   {
-    "name": "chukumi"
+    id:3,
+    name: "chukumi",
+    rating: 4.8
   }
 ]
+
+function Food({ name, rating }) {
+  return (
+    <div>
+      <h1>Hello {name}</h1>
+      <h2>rating {rating}</h2>
+    </div>
+  );
+}
+Food.prototype = {
+  name: PropTyeps.string.isRequired,
+  rating: PropTyeps.number.isRequired
+}
 
 function App() {
   return (
     <div className="App">
-      {foodILike.map(dish => <Food name={dish.name}/>)}
+      {foodILike.map(
+        dish => <Food key={dish.id} name={dish.name} rating={dish.rating}/>)}
     </div>
   );
 }
