@@ -1,44 +1,24 @@
 import React from 'react';
 import PropTyeps from 'prop-types';
 
-const foodILike = [
-  {
-    id:1,
-    name: "kimchi",
-    rating: 5
-  },
-  {
-    id:2,
-    name: "samgiopsal",
-    rating: 4.9
-  },
-  {
-    id:3,
-    name: "chukumi",
-    rating: 4.8
+
+class App extends React.Component{
+  state = {
+    count: 0
+  };
+
+  add = () => {this.setState(current => ({ count: current.count + 1 }))};
+  minus = () => {this.setState(current => ({ count: current.count - 1}))};
+
+  render() {
+    return (
+      <div>
+        <h1>The number is {this.state.count}</h1>
+        <button onClick={this.add}>Add</button>
+        <button onClick={this.minus}>Minus</button>
+      </div>
+    )
   }
-]
-
-function Food({ name, rating }) {
-  return (
-    <div>
-      <h1>Hello {name}</h1>
-      <h2>rating {rating}</h2>
-    </div>
-  );
-}
-Food.prototype = {
-  name: PropTyeps.string.isRequired,
-  rating: PropTyeps.number.isRequired
-}
-
-function App() {
-  return (
-    <div className="App">
-      {foodILike.map(
-        dish => <Food key={dish.id} name={dish.name} rating={dish.rating}/>)}
-    </div>
-  );
 }
 
 export default App;
