@@ -29,3 +29,7 @@
 ## Kotlin
 
 - 코틀린 가이드 따라 하기 (play.kotlinlang.org)
+
+## VanilaJS
+
+- 바닐라 자바스크립트 공부 하기 (정해진 레퍼런스는 없다!)
