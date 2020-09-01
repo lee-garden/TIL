@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>이벤트 버블링 이란?</h1>
+    <p>자식 노드에서 부모 노드로 같은 이벤트가 전파 되는것!</p>
+    <p>div3을 클릭 하면 div3 - > div2 -> div1로 이벤트가 전파 된다.</p>
+    <div onclick="alert('div1')" style="border: 1px solid black">
+      div1
+      <div onclick="alert('div2')" style="border: 1px solid black">
+        div2
+        <div onclick="alert('div3')" style="border: 1px solid black">div3</div>
+      </div>
+    </div>
+  </body>
+</html>
